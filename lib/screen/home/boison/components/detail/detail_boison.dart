@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joes_pizza/cubit/counter_cubit.dart';
+import 'package:joes_pizza/main.dart';
 import 'package:joes_pizza/screen/panier/panier_screen.dart';
+
+import '../../../../../constants.dart';
+import '../../../../../model/cart.dart';
 
 class BoisonDetailsPage extends StatefulWidget {
   static String routeName = "/detailboison";
@@ -161,49 +165,56 @@ class FoodTitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocConsumer<CounterCubit, CounterState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return Column(
           children: <Widget>[
-            Text(
-              productName,
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Color(0xFF3a3a3b),
-                  fontWeight: FontWeight.w500),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  state.name.toString(),
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Color(0xFF3a3a3b),
+                      fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  productPrice,
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Color(0xFF3a3a3b),
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
             ),
-            Text(
-              productPrice,
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Color(0xFF3a3a3b),
-                  fontWeight: FontWeight.w500),
+            SizedBox(
+              height: 5,
             ),
+            Row(
+              children: <Widget>[
+                Text(
+                  "by ",
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Color(0xFFa9a9a9),
+                      fontWeight: FontWeight.w400),
+                ),
+                Text(
+                  productHost,
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Color(0xFF1f1f1f),
+                      fontWeight: FontWeight.w400),
+                ),
+              ],
+            )
           ],
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Row(
-          children: <Widget>[
-            Text(
-              "by ",
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Color(0xFFa9a9a9),
-                  fontWeight: FontWeight.w400),
-            ),
-            Text(
-              productHost,
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Color(0xFF1f1f1f),
-                  fontWeight: FontWeight.w400),
-            ),
-          ],
-        )
-      ],
+        );
+      },
     );
   }
 }
@@ -215,34 +226,49 @@ class AddToCartMenu extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          InkWell(
-            onTap: () {},
-            child: Container(
-              width: 200.0,
-              height: 45.0,
-              decoration: new BoxDecoration(
-                color: Colors.green,
-                border: Border.all(color: Colors.white, width: 2.0),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Center(
-                child: BlocProvider.value(
-                  value: BlocProvider.of<CounterCubit>(context),
-                  child: InkWell(
-                    onTap: () => {
-                      Navigator.pushNamed(context, PanierScreen.routeName),
-                    },
-                    child: Text(
-                      'Add',
-                      style: new TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400),
+          BlocConsumer<CounterCubit, CounterState>(
+            listener: (context, state) {
+              // TODO: implement listener
+            },
+            builder: (context, state) {
+              return InkWell(
+                onTap: () {},
+                child: Container(
+                  width: 200.0,
+                  height: 45.0,
+                  decoration: new BoxDecoration(
+                    color: Colors.green,
+                    border: Border.all(color: Colors.white, width: 2.0),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Center(
+                    child: BlocProvider.value(
+                      value: BlocProvider.of<CounterCubit>(context),
+                      child: InkWell(
+                        onTap: () => {
+                          BlocProvider.of<CounterCubit>(context).pan(
+                              Cart(
+                                  pizza: home_items[2],
+                                  numOfItems: 2,
+                                  type: state.name.toString(),
+                                  ss: state.ss - state.valuee + 2),
+                              1),
+                          Navigator.pushNamed(
+                              context, MyStatefulWidget.routeName),
+                        },
+                        child: Text(
+                          'Add',
+                          style: new TextStyle(
+                              fontSize: 18.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
         ],
       ),

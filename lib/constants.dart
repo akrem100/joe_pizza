@@ -57,7 +57,7 @@ List<Pizza> home_items = [
       logo_path: 'assets/images/sandwich.jpg',
       image_path: '/sandwich'),
   Pizza(
-      title: "Coca",
+      title: "Boissons",
       subtitle: "coca",
       logo_path: 'assets/images/coca.png',
       image_path: '/boison'),

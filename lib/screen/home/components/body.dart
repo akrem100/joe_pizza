@@ -21,20 +21,23 @@ class Body extends StatelessWidget {
           ),
         ),
         height: double.infinity,
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+        child: Container(
+          decoration: BoxDecoration(color: Colors.black),
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            itemCount: home_items.length,
+            itemBuilder: (BuildContext context, int index) {
+              return CardGrid(
+                  onPress: () {
+                    // BlocProvider.of<CounterCubit>(context).increment(0, 'thon');
+                    Navigator.pushNamed(context, home_items[index].image_path);
+                  },
+                  title: home_items[index].title,
+                  logo: home_items[index].logo_path);
+            },
           ),
-          itemCount: home_items.length,
-          itemBuilder: (BuildContext context, int index) {
-            return CardGrid(
-                onPress: () {
-                  // BlocProvider.of<CounterCubit>(context).increment(0, 'thon');
-                  Navigator.pushNamed(context, home_items[index].image_path);
-                },
-                title: home_items[index].title,
-                logo: home_items[index].logo_path);
-          },
         ),
       ),
     );

@@ -16,6 +16,7 @@ class _PanierScreenState extends State<PanierScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Body(),
+      bottomNavigationBar: CheckoutCard(),
     );
   }
 }

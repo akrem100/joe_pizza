@@ -3,8 +3,14 @@ import 'package:joes_pizza/model/pizza.dart';
 class Cart {
   final Pizza pizza;
   final int numOfItems;
-
-  Cart({required this.pizza, required this.numOfItems});
+  final String type;
+  int ss;
+  Cart({
+    required this.pizza,
+    required this.numOfItems,
+    required this.type,
+    required this.ss,
+  });
 }
 
 // List<Cart> demoCarts = [

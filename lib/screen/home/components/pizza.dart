@@ -25,7 +25,7 @@ class _PizzaState extends State<Pizza> with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
-    List<SpecialOfferCard> home_items = [
+    List<SpecialOfferCard> pizza_items = [
       SpecialOfferCard(
           image: 'assets/images/pizza_2.jpg',
           category: "pop",
@@ -59,7 +59,7 @@ class _PizzaState extends State<Pizza> with AutomaticKeepAliveClientMixin {
           category: "Scellian",
           numOfBrands: 9,
           press: () => {
-                BlocProvider.of<CounterCubit>(context).increment(0, 'Fromagee'),
+                BlocProvider.of<CounterCubit>(context).increment(0, 'Scellian'),
                 Navigator.pushNamed(context, FoodDetailsPage.routeName),
               },
           pro: 3),
@@ -68,7 +68,8 @@ class _PizzaState extends State<Pizza> with AutomaticKeepAliveClientMixin {
           category: "Fruit de mer",
           numOfBrands: 9,
           press: () => {
-                BlocProvider.of<CounterCubit>(context).increment(0, 'Fromagee'),
+                BlocProvider.of<CounterCubit>(context)
+                    .increment(0, 'Fruit de mer'),
                 Navigator.pushNamed(context, FoodDetailsPage.routeName),
               },
           pro: 3)
@@ -84,7 +85,7 @@ class _PizzaState extends State<Pizza> with AutomaticKeepAliveClientMixin {
         value: CounterCubit(),
         child: CarouselSlider(
           options: CarouselOptions(height: 700.0),
-          items: home_items.map((i) {
+          items: pizza_items.map((i) {
             return Builder(
               builder: (BuildContext context) {
                 return InkWell(

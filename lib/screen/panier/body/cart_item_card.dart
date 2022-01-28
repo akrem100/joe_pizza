@@ -49,7 +49,7 @@ class CartItemCard extends StatelessWidget {
               // TODO: implement listener
             },
             builder: (context, state) {
-              print(state.name);
+              print(cart.type);
               return Column(
                 children: [
                   Text(
@@ -62,7 +62,8 @@ class CartItemCard extends StatelessWidget {
                   ),
                   Text.rich(
                     TextSpan(
-                      text: "number of ${state.name} ${state.valuee}",
+                      text:
+                          "type: ${cart.type} \n price: ${cart.numOfItems} DT",
                       style: TextStyle(color: Colors.black),
                     ),
                   ),

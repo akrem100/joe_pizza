@@ -30,6 +30,7 @@ class _BoisonState extends State<Boison> with AutomaticKeepAliveClientMixin {
           category: "coca",
           numOfBrands: 2,
           press: () => {
+                BlocProvider.of<CounterCubit>(context).checkk(2),
                 BlocProvider.of<CounterCubit>(context).increment(0, 'coca'),
                 Navigator.pushNamed(context, BoisonDetailsPage.routeName)
               },
@@ -39,6 +40,7 @@ class _BoisonState extends State<Boison> with AutomaticKeepAliveClientMixin {
           category: "boga",
           numOfBrands: 2,
           press: () => {
+                BlocProvider.of<CounterCubit>(context).checkk(2),
                 BlocProvider.of<CounterCubit>(context).increment(0, 'boga'),
                 Navigator.pushNamed(context, BoisonDetailsPage.routeName)
               },
@@ -48,6 +50,7 @@ class _BoisonState extends State<Boison> with AutomaticKeepAliveClientMixin {
           category: "fanta",
           numOfBrands: 2,
           press: () => {
+                BlocProvider.of<CounterCubit>(context).checkk(2),
                 BlocProvider.of<CounterCubit>(context).increment(0, 'fanta'),
                 Navigator.pushNamed(context, BoisonDetailsPage.routeName),
               },

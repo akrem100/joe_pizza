@@ -6,8 +6,10 @@ class CounterState {
   int? v;
   bool? s;
   List? list;
-  int? index = 0;
+  int index;
   List<Cart> demoCarts;
+  List<Cart> boisCarts;
+  int ss;
 
   CounterState({
     this.name,
@@ -15,7 +17,9 @@ class CounterState {
     this.v,
     this.s,
     this.list,
-    this.index,
+    required this.index,
     required this.demoCarts,
+    required this.boisCarts,
+    required this.ss,
   });
 }

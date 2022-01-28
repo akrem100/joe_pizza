@@ -10,6 +10,7 @@ import 'package:joes_pizza/screen/panier/panier_screen.dart';
 
 import '../../../../constants.dart';
 import '../../../../model/cart.dart';
+import '../../../panier/body/cart_item_card.dart';
 import '../../boison/components/detail/detail_boison.dart';
 
 class FoodDetailsPage extends StatefulWidget {
@@ -319,27 +320,31 @@ class _FoodDetailsPageState extends State<FoodDetailsPage>
 class AddToCartMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          InkWell(
-            onTap: () {},
-            child: Container(
-              width: 200.0,
-              height: 45.0,
-              decoration: new BoxDecoration(
-                color: Colors.green,
-                border: Border.all(color: Colors.white, width: 2.0),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: BlocProvider.value(
-                value: CounterCubit(),
+    return BlocBuilder<CounterCubit, CounterState>(builder: (context, state) {
+      return Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            InkWell(
+              onTap: () {},
+              child: Container(
+                width: 200.0,
+                height: 45.0,
+                decoration: new BoxDecoration(
+                  color: Colors.green,
+                  border: Border.all(color: Colors.white, width: 2.0),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
                 child: Center(
                   child: InkWell(
                     onTap: () => {
-                      BlocProvider.of<CounterCubit>(context)
-                          .pan(Cart(pizza: home_items[0], numOfItems: 2)),
+                      BlocProvider.of<CounterCubit>(context).pan(
+                          Cart(
+                              pizza: home_items[0],
+                              type: state.name.toString(),
+                              numOfItems: state.valuee,
+                              ss: state.ss),
+                          1),
                       Navigator.pushNamed(context, MyStatefulWidget.routeName),
                     },
                     child: Text(
@@ -353,10 +358,10 @@ class AddToCartMenu extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }
 
@@ -367,10 +372,11 @@ class DetailContentMenu extends StatelessWidget {
       child: Text(
         'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.',
         style: TextStyle(
-            fontSize: 14.0,
-            color: Colors.black87,
-            fontWeight: FontWeight.w400,
-            height: 1.50),
+          fontSize: 14.0,
+          color: Colors.black87,
+          fontWeight: FontWeight.w400,
+          height: 1.50,
+        ),
         textAlign: TextAlign.justify,
       ),
     );
