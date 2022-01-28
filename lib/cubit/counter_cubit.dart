@@ -93,4 +93,15 @@ class CounterCubit extends Cubit<CounterState> {
           ss: state.ss + state.valuee,
         )),
       };
+  void delete(aa) => {
+        state.demoCarts.remove(aa),
+        emit(CounterState(
+          valuee: state.valuee,
+          name: state.name,
+          demoCarts: state.demoCarts,
+          boisCarts: state.boisCarts,
+          index: state.index - 1,
+          ss: state.ss,
+        )),
+      };
 }

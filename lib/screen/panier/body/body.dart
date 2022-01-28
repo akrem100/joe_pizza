@@ -25,14 +25,12 @@ class _BodyState extends State<Body> {
             itemBuilder: (context, index) => Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
               child: Dismissible(
-                key: Key(state.demoCarts[index].type.toString()),
+                key: Key(state.demoCarts[index].toString()),
                 direction: DismissDirection.endToStart,
                 onDismissed: (direction) {
-                  setState(() {
-                    state.demoCarts.remove(index);
-                    BlocProvider.of<CounterCubit>(context)
-                        .decrement(state.demoCarts[index].numOfItems);
-                  });
+                  //state.demoCarts.remove(index);
+                  BlocProvider.of<CounterCubit>(context)
+                      .delete(state.demoCarts[index]);
                 },
                 background: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
