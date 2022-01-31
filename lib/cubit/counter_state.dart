@@ -9,9 +9,11 @@ class CounterState {
   int index;
   List<Cart> demoCarts;
   List<Cart> boisCarts;
+  Map<String, List> panier;
   int ss;
-
+  Map<String, int> pack;
   CounterState({
+    required Map<String, int> this.pack,
     this.name,
     required this.valuee,
     this.v,
@@ -20,6 +22,7 @@ class CounterState {
     required this.index,
     required this.demoCarts,
     required this.boisCarts,
+    required this.panier,
     required this.ss,
   });
 }

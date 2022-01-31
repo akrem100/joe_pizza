@@ -81,29 +81,51 @@ class _PizzaState extends State<Pizza> with AutomaticKeepAliveClientMixin {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: BlocProvider.value(
-        value: CounterCubit(),
-        child: CarouselSlider(
-          options: CarouselOptions(height: 700.0),
-          items: pizza_items.map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return InkWell(
-                  onTap: () => {
-                    i.press?.call(),
+      body: BlocBuilder<CounterCubit, CounterState>(
+        builder: (context, state) {
+          return BlocProvider.value(
+            value: CounterCubit(),
+            child: CarouselSlider(
+              options: CarouselOptions(height: 700.0),
+              items: pizza_items.map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return InkWell(
+                      onTap: () => {
+                        i.press?.call(),
+                        if (state.s == true &&
+                            state.pack["pizza"] != 0 &&
+                            state.pack["boisson"] != 0)
+                          {
+                            BlocProvider.of<CounterCubit>(context).calpack(1),
+                          }
+                        else if (state.s == true &&
+                            state.pack["pizza"] == 0 &&
+                            state.pack["boisson"] != 0)
+                          {
+                            BlocProvider.of<CounterCubit>(context).calpack(1),
+                          }
+                        else if (state.s == true &&
+                            state.pack["pizza"] == 0 &&
+                            state.pack["boisson"] == 0)
+                          {
+                            BlocProvider.of<CounterCubit>(context).calpack(1),
+                          }
+                      },
+                      child: SpecialOfferCard(
+                        image: i.image,
+                        category: i.category,
+                        numOfBrands: i.numOfBrands,
+                        press: i.press,
+                        pro: i.pro,
+                      ),
+                    );
                   },
-                  child: SpecialOfferCard(
-                    image: i.image,
-                    category: i.category,
-                    numOfBrands: i.numOfBrands,
-                    press: i.press,
-                    pro: i.pro,
-                  ),
                 );
-              },
-            );
-          }).toList(),
-        ),
+              }).toList(),
+            ),
+          );
+        },
       ),
     );
   }

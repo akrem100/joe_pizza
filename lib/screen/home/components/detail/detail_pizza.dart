@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:joes_pizza/cubit/counter_cubit.dart';
 import 'package:joes_pizza/main.dart';
 import 'package:joes_pizza/model/pizza.dart';
-import 'package:joes_pizza/screen/home/boison/components/boison.dart';
+import 'package:joes_pizza/screen/home/boison/components/boisson.dart';
 import 'package:joes_pizza/screen/home/components/special_offre_card.dart';
 import 'package:joes_pizza/screen/home/home_screen.dart';
 import 'package:joes_pizza/screen/panier/panier_screen.dart';
@@ -325,38 +326,58 @@ class AddToCartMenu extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            InkWell(
-              onTap: () {},
-              child: Container(
-                width: 200.0,
-                height: 45.0,
-                decoration: new BoxDecoration(
-                  color: Colors.green,
-                  border: Border.all(color: Colors.white, width: 2.0),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Center(
-                  child: InkWell(
-                    onTap: () => {
-                      BlocProvider.of<CounterCubit>(context).pan(
-                          Cart(
-                              pizza: home_items[0],
-                              type: state.name.toString(),
-                              numOfItems: state.valuee,
-                              ss: state.ss),
-                          1),
-                      Navigator.pushNamed(context, MyStatefulWidget.routeName),
-                    },
-                    child: Text(
-                      'Add',
-                      style: new TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400),
+            Row(
+              children: [
+                IconButton(
+                    icon: SvgPicture.asset("assets/icons/Plus Icon.svg"),
+                    iconSize: 60.0,
+                    onPressed: () => {}),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    width: 200.0,
+                    height: 45.0,
+                    decoration: new BoxDecoration(
+                      color: Colors.green,
+                      border: Border.all(color: Colors.white, width: 2.0),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Center(
+                      child: InkWell(
+                        onTap: () => {
+                          BlocProvider.of<CounterCubit>(context).pan(
+                              Cart(
+                                  pizza: home_items[0],
+                                  type: state.name.toString(),
+                                  numOfItems: state.valuee,
+                                  ss: state.ss),
+                              1),
+                          if (state.s == false)
+                            {
+                              Navigator.pushNamed(
+                                  context, MyStatefulWidget.routeName),
+                            }
+                          else if (state.s == true &&
+                              state.pack["pizza"] != 0 &&
+                              state.pack["boisson"] != 0)
+                            {}
+                        },
+                        child: Text(
+                          'Add',
+                          style: new TextStyle(
+                              fontSize: 18.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+                IconButton(
+                    icon: SvgPicture.asset("assets/icons/remove.svg"),
+                    iconSize: 60.0,
+                    onPressed: () => {}),
+              ],
             ),
           ],
         ),

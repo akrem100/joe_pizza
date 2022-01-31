@@ -68,6 +68,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Center(
           child: IconButton(
               icon: new Image.asset('assets/icons/JOESPIZZA.png'),

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:joes_pizza/model/package.dart';
 import 'package:joes_pizza/model/pizza.dart';
+import 'package:joes_pizza/screen/home/components/detail/detail_pizza.dart';
 import 'package:joes_pizza/size_config.dart';
 
+import 'cubit/counter_cubit.dart';
 import 'model/grid.dart';
+import 'screen/home/components/special_offre_card.dart';
 
 const kPrimaryColor = Color(0xFFFF7643);
 const kPrimaryLightColor = Color(0xFFFFECDF);
@@ -73,11 +78,62 @@ List<ModelGrid> promo = [
     subtitle: "due",
     logo_path: 'assets/images/pizza_2.jpg',
     image_path: '/pizza',
-    path: [1, 1],
+    path: [1],
   ),
   ModelGrid(
-      title: "trio",
-      subtitle: "trio",
-      logo_path: 'assets/images/sandwich.jpg',
-      image_path: '/boison'),
+    title: "trio",
+    subtitle: "trio",
+    logo_path: 'assets/images/sandwich.jpg',
+    image_path: '/boison',
+    path: [2],
+  ),
+];
+
+List<SpecialOfferCard> pizza_items = [
+  SpecialOfferCard(
+      image: 'assets/images/pizza_2.jpg',
+      category: "pop",
+      numOfBrands: 15,
+      press: (context) => {
+            // BlocProvider.of<CounterCubit>(context).checkk(20, 0),
+            BlocProvider.of<CounterCubit>(context).increment(0, 'pop'),
+            Navigator.pushNamed(context, FoodDetailsPage.routeName)
+          },
+      pro: 1),
+  SpecialOfferCard(
+      image: 'assets/images/pizza_2.jpg',
+      category: "Thon",
+      numOfBrands: 11,
+      press: (context) => {
+            BlocProvider.of<CounterCubit>(context).increment(0, 'thon'),
+            Navigator.pushNamed(context, FoodDetailsPage.routeName)
+          },
+      pro: 2),
+  SpecialOfferCard(
+      image: 'assets/images/pizza_2.jpg',
+      category: "Fromage",
+      numOfBrands: 9,
+      press: (context) => {
+            BlocProvider.of<CounterCubit>(context).increment(0, 'Fromagee'),
+            Navigator.pushNamed(context, FoodDetailsPage.routeName),
+          },
+      pro: 3),
+  SpecialOfferCard(
+      image: 'assets/images/pizza_2.jpg',
+      category: "Scellian",
+      numOfBrands: 9,
+      press: (context) => {
+            BlocProvider.of<CounterCubit>(context).increment(0, 'Scellian'),
+            Navigator.pushNamed(context, FoodDetailsPage.routeName),
+          },
+      pro: 3),
+  SpecialOfferCard(
+      image: 'assets/images/pizza_2.jpg',
+      category: "Fruit de mer",
+      numOfBrands: 9,
+      press: (context) => {
+            BlocProvider.of<CounterCubit>(context).increment(0, 'Fruit de mer'),
+            Navigator.pushNamed(context, FoodDetailsPage.routeName),
+          },
+      pro: 3)
 ];

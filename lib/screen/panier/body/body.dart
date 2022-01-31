@@ -29,8 +29,9 @@ class _BodyState extends State<Body> {
                 direction: DismissDirection.endToStart,
                 onDismissed: (direction) {
                   //state.demoCarts.remove(index);
-                  BlocProvider.of<CounterCubit>(context)
-                      .delete(state.demoCarts[index]);
+                  BlocProvider.of<CounterCubit>(context).delete(
+                      state.demoCarts[index],
+                      state.demoCarts[index].numOfItems);
                 },
                 background: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),

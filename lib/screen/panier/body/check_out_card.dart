@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:joes_pizza/screen/panier/body/list.dart';
+import 'package:stylish_dialog/stylish_dialog.dart';
+import 'dart:math';
 import '../../../components/defaults_button.dart';
 import '../../../constants.dart';
 import '../../../cubit/counter_cubit.dart';
@@ -17,6 +19,9 @@ class CheckoutCard extends StatelessWidget {
     return BlocConsumer<CounterCubit, CounterState>(listener: (context, state) {
       // TODO: implement listener
     }, builder: (context, state) {
+      Random random = new Random();
+      int randomNumber = random.nextInt(100000);
+
       return Container(
         padding: EdgeInsets.symmetric(
           vertical: 15,
@@ -42,27 +47,30 @@ class CheckoutCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFF5F6F9),
-                      borderRadius: BorderRadius.circular(10),
+              InkWell(
+                onTap: () => {Navigator.pushNamed(context, Lisst.routeName)},
+                child: Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF5F6F9),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: SvgPicture.asset("assets/icons/receipt.svg"),
                     ),
-                    child: SvgPicture.asset("assets/icons/receipt.svg"),
-                  ),
-                  Spacer(),
-                  Text("Add voucher code"),
-                  const SizedBox(width: 10),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 12,
-                    color: kTextColor,
-                  )
-                ],
+                    Spacer(),
+                    Text("Add voucher code"),
+                    const SizedBox(width: 10),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 12,
+                      color: kTextColor,
+                    )
+                  ],
+                ),
               ),
               SizedBox(height: 20),
               Row(
@@ -83,7 +91,21 @@ class CheckoutCard extends StatelessWidget {
                     width: 150,
                     child: DefaultButton(
                       text: "Check Out",
-                      press: () {},
+                      press: () {
+                        random;
+                        print(randomNumber);
+                        state.panier
+                            .addAll({randomNumber.toString(): state.demoCarts});
+
+                        print(state.panier);
+                        StylishDialog(
+                                context: context,
+                                alertType: StylishDialogType.SUCCESS,
+                                titleText: ' Your Code voucher is   ',
+                                contentText: '$randomNumber',
+                                style: Style.Default)
+                            .show();
+                      },
                     ),
                   ),
                 ],
